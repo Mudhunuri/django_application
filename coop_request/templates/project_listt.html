@@ -1,0 +1,64 @@
+{% extends "base.html"%} {% block content %}
+<table class="table table -borderless">
+  <thead class="border-bottom font-weight-bold">
+    <!-- <a href="{% url 'export' %}">Export Data</a> -->
+    <a href="{% url 'export' %}" class="btn btn-outline-success">
+      <i class="fa-solid fa-file-excel"></i>Export
+    </a>
+    <tr>
+      
+      <td><input type="checkbox" class="checkthis" /></td>
+      <td>WO</td>
+      <td>R&T</td>
+      <td>CUName</td>
+      <td>Status</td>
+      <td>CMS</td>
+      <td>Scope</td>
+      <td>Smart REQ</td>
+      <td>Smart</td>
+      <td>Proc REQ</td>
+      <!-- <td>Proc ID</td>
+      <td>ABBR REQ</td> -->
+      <!-- <td>Host REQ</td>
+      <td>SNOW COM</td> -->
+      <td>
+        <a href="{% url 'form' %}" class="btn btn-outline-success">
+          <i class="fas fa-plus"></i> Add New
+        </a>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for prj in project_list %}
+    <tr>
+      <td><input type="checkbox" class="checkthis" /></td>
+      <td>{{prj.WO}}</td>
+      <td>{{prj.R_T}}</td>
+      <td>{{prj.CUName}}</td>
+      <td>{{prj.Status}}</td>
+      <td>{{prj.CMS}}</td>
+      <td>{{prj.Scope}}</td>
+      <td>{{prj.Smart_req}}</td>
+      <td>{{prj.smart}}</td>
+      <td>{{prj.Proc_req}}</td>
+      <!-- <td>{{prj.Proc_id}}</td>
+      <td>{{prj.Abbr_req}}</td> -->
+      <!-- <td>{{prj.Host_req}}</td>
+      <td>{{prj.Com}}</td> -->
+      <td>
+        <a
+          href="{% url 'project_update' prj.id %}" class="btn text-secondary px-0">
+          <i class="far fa-edit fa-lg"></i>
+        </a>
+        <form action="{% url 'project_delete' prj.id %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn">
+                <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+            </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
